@@ -1,65 +1,30 @@
-<!-- <script>
-    // Define a reusable service component
-   export let services = [
-    {
-        name: "website design",
-        description: "We craft visually appealing and user-friendly website designs that reflect your brand and keep your visitors engaged."
-    },
-    {
-        name: "app design",
-        description: "Modern and intuitive UI/UX design for Android apps, focused on smooth user experiences and efficient user flows."
-    },
-    {
-        name: "website creation",
-        description: "From idea to launch, we build fast, responsive, and secure websites tailored to your needs."
-    },
-    {
-        name: "app creation",
-        description: "We develop reliable and optimized Android apps built to perform well on a wide range of devices."
-    },
-    {
-        name: "full-stack website",
-        description: "Complete end-to-end development — frontend, backend, and database — for dynamic and interactive websites."
-    },
-    {
-        name: "full-stack app",
-        description: "We handle the entire development process for Android apps, including backend services and data handling."
-    },
-    {
-        name: "app/website management",
-        description: "Ongoing maintenance, updates, and optimization to ensure your digital products run smoothly and stay secure."
-    }
-];
 
-</script>
-<section id="services">
-    <div class="main">
-        <h1 class="title">our_services</h1>
-        <div class="scroll">
-        <div class="container">
-            {#each services as { name, description }}
-                <div class="service">
-                    <h1>{name}</h1>
-                    <p>{description}</p>
-                </div>
-            {/each}
-        </div>
-        </div>
-    </div>
-</section> -->
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { language } from "../values.js";
 	let scrollContainer: HTMLDivElement | null = null;
 
-	export let services = [
-		{ name: "website design", description: "We craft visually appealing and user-friendly website designs that reflect your brand and keep your visitors engaged." },
-		{ name: "app design", description: "Modern and intuitive UI/UX design for Android apps, focused on smooth user experiences and efficient user flows." },
-		{ name: "website creation", description: "From idea to launch, we build fast, responsive, and secure websites tailored to your needs." },
-		{ name: "app creation", description: "We develop reliable and optimized Android apps built to perform well on a wide range of devices." },
-		{ name: "full-stack website", description: "Complete end-to-end development — frontend, backend, and database — for dynamic and interactive websites." },
-		{ name: "full-stack app", description: "We handle the entire development process for Android apps, including backend services and data handling." },
-		{ name: "app/website management", description: "Ongoing maintenance, updates, and optimization to ensure your digital products run smoothly and stay secure." }
-	];
+    export let services = $language == "cz" ?
+    [
+        { name: "návrh webů", description: "Navrhujeme vizuálně atraktivní a uživatelsky přívětivé weby, které odrážejí vaši značku a zaujmou návštěvníky." },
+        { name: "návrh aplikací", description: "Moderní a intuitivní UI/UX design pro Android aplikace, zaměřený na efektivní používání." },
+        { name: "tvorba webů", description: "Od nápadu až po spuštění — stavíme rychlé, responzivní a bezpečné weby na míru vašim potřebám." },
+        { name: "tvorba aplikací", description: "Vyvíjíme spolehlivé a optimalizované Android aplikace, které fungují skvěle na různých zařízeních." },
+        { name: "full-stack web", description: "Kompletní vývoj od A do Z — frontend, backend a databáze — pro dynamické a interaktivní weby." },
+        { name: "full-stack aplikace", description: "Zajišťujeme celý vývojový proces Android aplikací včetně backendových služeb a správy dat." },
+        { name: "správa webů/aplikací", description: "Průběžná údržba, aktualizace a optimalizace, aby vaše digitální produkty běžely hladce." }
+    ]
+    :
+    [
+        { name: "website design", description: "We craft visually appealing and user-friendly website designs that reflect your brand and keep your visitors engaged." },
+        { name: "app design", description: "Modern and intuitive UI/UX design for Android apps, focused on smooth user experiences and efficient user flows." },
+        { name: "website creation", description: "From idea to launch, we build fast, responsive, and secure websites tailored to your needs." },
+        { name: "app creation", description: "We develop reliable and optimized Android apps built to perform well on a wide range of devices." },
+        { name: "full-stack website", description: "Complete end-to-end development — frontend, backend, and database — for dynamic and interactive websites." },
+        { name: "full-stack app", description: "We handle the entire development process for Android apps, including backend services and data handling." },
+        { name: "app/website management", description: "Ongoing maintenance, updates, and optimization to ensure your digital products run smoothly and stay secure." }
+    ];
+
 
 	onMount(() => {
 		let scrollAmount = 0;

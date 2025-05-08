@@ -1,19 +1,43 @@
 <script lang="ts">
     import ThankYou from "./utils/thank_you.svelte";
+    import {language} from "../values.js"
+	import { onMount } from "svelte";
     let name = $state("")
     let email = $state("")
     let phone = $state("")
     let message = $state("")   
-    let shor_error = $state(false)  
+    let show_error = $state(false)  
     let show_thanks = $state(false)
-    
+    let container: HTMLDivElement;
+    // let styles = {
+	// 	'asterix-color': "#FFF"
+	// }
+    let asterix_color = $state("#FFF")
+	let cssVarStyles = $derived(`--asterix-color:${asterix_color}`)
+
+    onMount(() => {
+		function handleScroll() {
+			show_error = false;
+            asterix_color = "#FFF"
+		}
+
+		window.addEventListener('scroll', handleScroll);
+
+		// Cleanup when component is destroyed
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		}
+	});
+
     async function check_func(event: Event){
         event.preventDefault()
         if(name == "" && email == ""){
-            shor_error = true
+            show_error = true
+            asterix_color ="#F0A202"
             return
         } else{
-            shor_error = false
+            show_error = false
+            asterix_color = "#FFF"
             console.log(name, email, phone, message)
             await fetch('/api', {
             method: 'POST',
@@ -24,7 +48,6 @@
             email = ""
             phone = ""
             message = ""
-            shor_error = false
             show_thanks = true
             setTimeout(() => {
                 show_thanks = false
@@ -34,34 +57,38 @@
         
     }
 </script>
-<section id="get_quote">
-<div class="container">
+<section id="get_quote" style="{cssVarStyles}">
+<div class="container" bind:this={container}>
     <form action="">
-        <h1>get_quote</h1>
+        <h1>
+            {
+                $language=="cz"? "kontakt":"get_quote"
+            }
+        </h1>
         <div class="input">
-            <label for="name">* name</label>
-            <input type="text" id="name" placeholder="name" bind:value={name}>
+            <label for="name" class="required"><span class="asterix">*</span> {$language=="cz"?"jméno":"name"}</label>
+            <input type="text" id="name" placeholder={$language=="cz"?"jméno":"name"} bind:value={name}>
         </div>
         <div class="input">
-            <label for="email">* email</label>
-            <input type="email" id="email" placeholder="email" bind:value={email}>
+            <label for="email" class="required"><span class="asterix">*</span> {$language=="cz"?"email":"email"}</label>
+            <input type="email" id="email" placeholder={$language=="cz"?"email":"email"} bind:value={email}>
         </div>
         <div class="input">
-            <label for="phone">  phone</label>
-            <input type="tel" id="tel" placeholder="phone" bind:value={phone}>
+            <label for="phone">  {$language=="cz"?"telefon":"phone"}</label>
+            <input type="tel" id="tel" placeholder={$language=="cz"?"telefon":"phone"} bind:value={phone}>
         </div>
         <div class="textarea">
-            <label for="message">  message</label>
-            <textarea id="message" placeholder="message" bind:value={message}></textarea>
+            <label for="message">  {$language=="cz"?"zpráva_pro_nás":"message"}</label>
+            <textarea id="message" placeholder={$language=="cz"?"zpráva":"message"} bind:value={message}></textarea>
         </div>
-        <button type="submit" onclick={check_func}>submit</button>
-        {#if shor_error}
+        <button type="submit" onclick={check_func}>{$language=="cz"?"poslat":"submit"}</button>
+        {#if show_error}
             <div class="error">
-                <p>please fill in all fields</p>
+                <p>{$language=="cz"?"Prosím vyplňte všechna povínná pole":"Please fill all required fields"}</p>
             </div>
         {/if}
         {#if show_thanks}
-            <ThankYou message={"thank you for your message"} />
+            <ThankYou message={$language=="cz"?"Děkujeme ":"Thank you"} />
         {/if}
     </form>
     
@@ -101,6 +128,9 @@
             width: fit-content;
             font-family: "Cascadia Code", monospace;
         }
+        .required{
+            color:var(--asterix-color);
+        }
         .input{
             display: flex;
             flex-direction: column;
@@ -108,6 +138,7 @@
             align-items: start;
             font-family: "Cascadia Code", monospace;
             font-weight: 400;
+            margin-top: 5px;
         }
         input{
             background-color: #fff;
@@ -119,6 +150,11 @@
             text-align: center;
             height: fit-content;
             width: 100%;
+        }
+        input:focus{
+            border: none;
+            box-shadow: rgba(240, 162, 2, 1) 0 0 10px;
+            outline: none;
         }
         textarea{
             background-color: #fff;
@@ -136,11 +172,17 @@
             justify-content: center;
             align-items: center;
         }
+        textarea:focus{
+            border: none;
+            box-shadow: rgba(240, 162, 2, 1) 0 0 10px;
+            outline: none;
+        }
         textarea::placeholder{
             text-align: center;
         }
         .textarea{
             width: 100%;
+            margin-top: 5px;
         }
         button{
         background-color: #FFF;
@@ -156,18 +198,24 @@
         margin-top: 1rem;
     }
     .error{
-        width: 100%;
+        position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
+        bottom: 0;
     }
     .error p{
-        color: #FFF;
-        padding: 1rem;
+        color: #F0A202;
+         padding: 1rem;
         font-family: "Cascadia Code", monospace;
         font-size: 24px;
         font-weight: 400;
         margin: 0;
         word-wrap: break-word;
+    }
+    .asterix {
+        color: var(--asterix-color);
+       
     }
 </style>

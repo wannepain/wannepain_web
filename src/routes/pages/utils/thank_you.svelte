@@ -1,11 +1,12 @@
 <script lang="ts">
     let { message }: { message: string } = $props();
+    import { language} from '../../values.js';
 </script>
 
 
 <div class="overlay">
     <h1>{message}</h1>
-    <p>You will be redirected back soon</p>
+    <p>{$language=="cz"?"Brzy budete přesměrování zpět":"You will be redirected back soon"}</p>
 </div>
 
 <style>

@@ -35,11 +35,15 @@
 	<nav>
 		<ul>
 			<li><a href="#mission" class:active={$currentSection === 'mission'}>
-                our_mission
+                {$language == "cz"? "naše_mise":"our_mission"}
             </a></li>
-			<li><a href="#services" class:active={$currentSection === 'services'}>services</a></li>
+			<li><a href="#services" class:active={$currentSection === 'services'}>
+				{$language == "cz"? "služby":"services"}
+			</a></li>
 			<li class="quote">
-				<a href="#get_quote" class:active={$currentSection === 'get_quote'}>get_quote</a>
+				<a href="#get_quote" class:active={$currentSection === 'get_quote'}>
+					{$language == "cz"? "kontakt":"get_quote"}
+				</a>
 			</li>
 		</ul>
 	</nav>

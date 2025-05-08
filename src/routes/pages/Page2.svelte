@@ -1,13 +1,28 @@
+<script>
+    import {language} from "../values.js"
+
+</script>
+
 <section id="mission">
     <div>
-        <h1>our_mission</h1>
-        <p>
-            At <strong>wannepain</strong>, our mission is to <strong>empower businesses and individuals</strong> with modern, high-performing websites, apps, and digital tools. 
-        </p>
-        <p>
-            We believe that <strong>great technology should be simple, effective, and accessible</strong> — not overwhelming. That’s why we <strong>build and manage custom solutions</strong> that help our clients grow, without the stress of handling it all alone.
-        </p>
-
+        <h1>
+            {$language == "cz" ? "naše_mise" : "our_mission"}
+        </h1>
+            {#if $language == "cz"}
+             <p>
+                Naším posláním je <strong>posilovat firmy a jednotlivce</strong> pomocí moderních, výkonných webů, aplikací a digitálních nástrojů.
+            </p>
+            <p>
+                Věříme, že <strong>skvělá technologie by měla být jednoduchá, efektivní a dostupná</strong> — ne ohromující. Proto <strong>vytváříme a spravujeme řešení na míru</strong>, která pomáhají našim klientům růst bez stresu a starostí.
+            </p>
+            {:else}
+                <p>
+                    At <strong>wannepain</strong>, our mission is to <strong>empower businesses and individuals</strong> with modern, high-performing websites, apps, and digital tools. 
+                </p>
+                <p>
+                    We believe that <strong>great technology should be simple, effective, and accessible</strong> — not overwhelming. That’s why we <strong>build and manage custom solutions</strong> that help our clients grow, without the stress of handling it all alone.
+                </p>
+            {/if}
     </div>
 </section>
 <style>

@@ -1,46 +1,9 @@
-<!-- 
-<div class="main">
-    <div class="column">
-        <div class="row">
-            <h1>your_business.</h1>
-            <h2>online. managed.</h2>
-        </div>
-    </div>
-    <div class="column"></div>
-</div>
-<style>
-    .main{
-        display: flex;
-        height: 100vh;
-        flex-direction: row;
-        padding: 0 2.5rem;
-    }
-    .column{
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: end;
-        align-items: center;
-        padding-bottom: 7rem;
-    }
-    
-    h1,h2{
-        font-family: "Cascadia Code", monospace;
-        color: #FFF;
-        font-size: 64px;
-        margin: 0;
-        font-weight: 300;
-    }
-    h2{
-        font-weight: 600;
-    }
-
-</style> -->
 <script>
 	import { onMount } from "svelte";
+    import { language} from "../values.js";
 
-    let fullText1 = "your_business.";
-    let fullText2 = "online. managed.";
+    let fullText1 = $language == "cz"?  "váš_byznys.":"your_business.";
+    let fullText2 = $language == "cz"?"online. bez_starostí.":"online. managed.";
     let typed1 = "";
     let typed2 = "";
     let index1 = 0;
