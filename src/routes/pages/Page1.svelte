@@ -41,10 +41,16 @@
             <h2>{typed2}{#if typed2.length < fullText2.length && typed1.length == fullText1.length}<span class="cursor">|</span>{/if}</h2>
         </div>
     </div>
-    <div class="column"></div>
+    <div class="column special">
+        <div class="row">
+            <img src="/w_logo_laptop_concrete.png" alt="Laptop on W concrete">
+        </div>
+        
+    </div>
 </div>
 
 <style>
+    
     .main {
         display: flex;
         height: 100vh;
@@ -78,6 +84,13 @@
     @keyframes blink {
         0%, 100% { opacity: 1; }
         50% { opacity: 0; }
+    }
+    img{
+        width: 600px;
+        height: 600px;
+    }
+    .special{
+        padding-bottom: 0 !important;
     }
 </style>
 
