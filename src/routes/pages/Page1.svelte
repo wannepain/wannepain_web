@@ -1,11 +1,13 @@
 <script>
 	import { onMount } from "svelte";
     import { language} from "../values.js";
+    import {fade} from 'svelte/transition';
 
     let fullText1 = $language == "cz"?  "váš_byznys.":"your_business.";
     let fullText2 = $language == "cz"?"online. bez_starostí.":"online. managed.";
-    let typed1 = "";
-    let typed2 = "";
+    let show_image = $state(false);
+    let typed1 = $state("");
+    let typed2 = $state("");
     let index1 = 0;
     let index2 = 0;
 
@@ -14,6 +16,7 @@
         if (index1 < fullText1.length) {
             typed1 += fullText1[index1++];
             setTimeout(typeLine1, 100);
+            show_image = true
         } else {
             // Start second line typing after the first line is complete
             setTimeout(typeLine2, 500);
@@ -43,7 +46,9 @@
     </div>
     <div class="column special">
         <div class="row">
-            <img src="/w_logo_laptop_concrete.png" alt="Laptop on W concrete">
+            {#if show_image}
+            <img src="/w_logo_laptop_concrete.png" alt="Laptop on W concrete" transition:fade={{duration:1000}}>
+            {/if}
         </div>
         
     </div>
@@ -86,11 +91,9 @@
         50% { opacity: 0; }
     }
     img{
-        width: 600px;
-        height: 600px;
+        width: 35rem;
+        height: 35rem;
     }
-    .special{
-        padding-bottom: 0 !important;
-    }
+    
 </style>
 

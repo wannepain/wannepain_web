@@ -4,14 +4,21 @@
     import Page2 from './pages/Page2.svelte';
 	import Page3 from './pages/Page3.svelte';
     import Page4 from './pages/Page4.svelte';
+	import HeaderMobile from "./pages/mobile/Header.svelte";
 	import { onMount } from 'svelte';
 	import {language} from './values.js';
+
+	let width = $state(0)
+	let height = $state(0)
 
 	onMount(async () => {
 		const country = await getUserCountryCode();
 		if (country && country !== 'CZ') {
 			language.set('en');
 		}
+		width = window.innerWidth;
+		height = window.innerHeight;
+		console
 	});
 
 	async function getUserCountryCode() {
@@ -27,13 +34,18 @@
 </script>
 
 <div>
-    <Header />
-    <main>
-        <Page1 />
-        <Page2 />
-        <Page3 />
-        <Page4 />
-    </main>
+	{#if width > 800 && height > 800}
+		<Header />
+		<main>
+			<Page1 />
+			<Page2 />
+			<Page3 />
+			<Page4 />
+		</main>
+	{:else}
+		<HeaderMobile />
+	{/if}
+    
 </div>
 <style>
     div{
