@@ -5,6 +5,10 @@
 	import Page3 from './pages/Page3.svelte';
     import Page4 from './pages/Page4.svelte';
 	import HeaderMobile from "./pages/mobile/Header.svelte";
+	import Page1Mobile from "./pages/mobile/Page1.svelte";
+	import Page2Mobile from "./pages/mobile/Page2.svelte";
+	import Page3Mobile from "./pages/mobile/Page3.svelte";
+	import Page4Mobile from "./pages/mobile/Page4.svelte";
 	import { onMount } from 'svelte';
 	import {language} from './values.js';
 
@@ -44,6 +48,10 @@
 		</main>
 	{:else}
 		<HeaderMobile />
+		<Page1Mobile />
+		<Page2Mobile />
+		<Page3Mobile />
+		<Page4Mobile />
 	{/if}
     
 </div>
