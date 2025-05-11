@@ -54,7 +54,7 @@
 
 <section id="services">
     <div class="main">
-        <h1 class="title">our_services</h1>
+        <h1 class="title">{$language =="cz" ? "naše_služby":"our_services"}</h1>
         <div class="scroll" bind:this={scrollContainer}>
             <div class="container">
                 {#each services as { name, description }}
