@@ -69,6 +69,7 @@
         align-items: start;
         /* padding-bottom: 7rem; */
         width: 100%;
+        padding-bottom: 3rem;
     }
     h1, h2 {
         font-family: "Cascadia Code", monospace;
