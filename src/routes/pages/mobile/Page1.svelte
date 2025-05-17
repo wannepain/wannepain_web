@@ -3,7 +3,7 @@
     import { language} from "../../values.js";
     import {fade} from 'svelte/transition';
 
-    let fullText1 = $language == "cz"?  "váš_byznys.":"your_business.";
+    let fullText1 = $language == "cz"?  "vaše_firma.":"your_business.";
     let fullText2 = $language == "cz"?"online. bez_starostí.":"online. managed.";
     let show_image = $state(false);
     let typed1 = $state("");
