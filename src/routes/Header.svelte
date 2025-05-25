@@ -29,7 +29,7 @@
 
 <header>
 	<div>
-		<h1>wannepain</h1>
+		<h1><a href="/">wannepain</a></h1>
 	</div>
 
 	<nav>
@@ -77,13 +77,14 @@
 		opacity: 1;
 		font-weight: bold;
 	}
-	h1 {
+	h1 a{
 		font-size: 48px;
 		font-weight: 600;
 		font-family: "Cascadia Code", monospace;
 		color: #fff;
 		width: fit-content;
 		margin: 0;
+		opacity: 1;
 	}
 	div,
 	nav {
@@ -120,5 +121,8 @@
 	a:hover {
 		/* color: #00ffff; */
 		opacity: 0.9;
+	}
+	h1 a:hover {
+		opacity: 1;
 	}
 </style>

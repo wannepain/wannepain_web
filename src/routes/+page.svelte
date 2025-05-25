@@ -11,6 +11,7 @@
 	import Page4Mobile from "./pages/mobile/Page4.svelte";
 	import { onMount } from 'svelte';
 	import {language} from './values.js';
+	import Packages from './pages/packages/Packages.svelte';
 
 	let width = $state(0)
 	let height = $state(0)
@@ -39,15 +40,16 @@
 
 <div>
 	{#if width > 800 && height > 800}
-		<Header />
+		<!-- <Header /> -->
 		<main>
 			<Page1 />
-			<Page2 />
+			<!-- <Page2 /> -->
+			<Packages/>
 			<Page3 />
 			<Page4 />
 		</main>
 	{:else}
-		<HeaderMobile />
+		<!-- <HeaderMobile /> -->
 		<Page1Mobile />
 		<Page2Mobile />
 		<Page3Mobile />
