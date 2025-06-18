@@ -1,6 +1,6 @@
 <script>
     const { data } = $props();
-    import { goto } from "$app/navigation";
+    import {showOverlay} from "../../routes/writables/showOverlay.js";
     import {language} from "../values.js";
     console.log(data.packageId);
     import { packages, cz_packages } from "../pages/packages/values.js";
@@ -8,7 +8,7 @@
 
     function onclick() {
         // This function can be used to handle any click events if needed
-        goto(`/#get_quote`);
+        $showOverlay = true;
     }
 </script>
 <div class="container">
@@ -36,6 +36,7 @@
         align-items: center;
         color: #FFF;
         font-family: "Cascadia Code", monospace;
+        
     }
     .card {
         width: 40%;
@@ -66,7 +67,7 @@
         padding: 6px 5rem ;
         background-color: transparent;
         font-family: "Cascadia Code", monospace;
-    
+        user-select: none;
     }
     .price_before_reduction{
         text-decoration: line-through;

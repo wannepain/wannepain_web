@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
     import {language} from './values.js';
+	import { goto } from '$app/navigation';
 
 	const currentSection = writable('');
 	const sections = ['mission', 'services', 'get_quote'];
@@ -34,14 +35,20 @@
 
 	<nav>
 		<ul>
-			<li><a href="#mission" class:active={$currentSection === 'mission'}>
-                {$language == "cz"? "naše_mise":"our_mission"}
-            </a></li>
-			<li><a href="#services" class:active={$currentSection === 'services'}>
+			<li>
+				<a
+					href="/#mission"
+					class:active={$currentSection === 'mission'}
+					on:click|preventDefault={() => goto('/#mission')}
+				>
+					{$language == "cz"? "naše_mise":"our_mission"}
+				</a>
+			</li>
+			<li><a href="/#services" class:active={$currentSection === 'services'} on:click|preventDefault={() => goto('/#services')}>
 				{$language == "cz"? "služby":"services"}
 			</a></li>
 			<li class="quote">
-				<a href="#get_quote" class:active={$currentSection === 'get_quote'}>
+				<a href="/#get_quote" class:active={$currentSection === 'get_quote'} on:click|preventDefault={() => goto('/#get_quote')}>
 					{$language == "cz"? "kontakt":"get_quote"}
 				</a>
 			</li>
