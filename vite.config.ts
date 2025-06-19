@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	server: {
@@ -7,5 +8,12 @@ export default defineConfig({
 		port: 5173, // or whatever port you prefer
 		cors: true // allows cross-origin requests; customize if needed
 	},
-	plugins: [sveltekit()]
+	plugins: [
+		tailwindcss(),
+		sveltekit()
+		
+	]
+	// css: {
+	// 	transformer: 'lightningcss'  // optional, but helps with plugin compatibility :contentReference[oaicite:4]{index=4}
+	//   }
 });

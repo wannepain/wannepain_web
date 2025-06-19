@@ -1,4 +1,5 @@
 <script>
+    // import "../../../static/styles.css";
     const { data } = $props();
     import {showOverlay} from "../../routes/writables/showOverlay.js";
     import {language} from "../values.js";

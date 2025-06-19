@@ -1,14 +1,15 @@
 <script lang="ts">
-    import Header from './Header.svelte';
+    // import Header from './Header.svelte';
     import Page1 from './pages/Page1.svelte';
     import Page2 from './pages/Page2.svelte';
 	import Page3 from './pages/Page3.svelte';
     import Page4 from './pages/Page4.svelte';
-	import HeaderMobile from "./pages/mobile/Header.svelte";
+	// import HeaderMobile from "./pages/mobile/Header.svelte";
 	import Page1Mobile from "./pages/mobile/Page1.svelte";
 	import Page2Mobile from "./pages/mobile/Page2.svelte";
 	import Page3Mobile from "./pages/mobile/Page3.svelte";
 	import Page4Mobile from "./pages/mobile/Page4.svelte";
+	import MobilePackages from "./../routes/pages/packages/mobile/MobilePackages.svelte";;
 	import { onMount } from 'svelte';
 	import {language} from './values.js';
 	import Packages from './pages/packages/Packages.svelte';
@@ -43,7 +44,7 @@
 		<!-- <Header /> -->
 		<main>
 			<Page1 />
-			<!-- <Page2 /> -->
+			<Page2 />
 			<Packages/>
 			<Page3 />
 			<Page4 />
@@ -52,6 +53,7 @@
 		<!-- <HeaderMobile /> -->
 		<Page1Mobile />
 		<Page2Mobile />
+		<!-- <MobilePackages /> -->
 		<Page3Mobile />
 		<Page4Mobile />
 	{/if}
