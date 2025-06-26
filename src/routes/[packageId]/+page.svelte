@@ -102,4 +102,16 @@
         box-shadow: rgba(255, 255, 255, 0.3) 0 0 5px;
         cursor: auto;
     }
+    @media (max-width: 768px){
+        .card{
+            width: 90%;
+        }
+        .card h1{
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+        .card p{
+            font-size: 20px;
+        }
+    }
 </style>

@@ -53,7 +53,7 @@
 		<!-- <HeaderMobile /> -->
 		<Page1Mobile />
 		<Page2Mobile />
-		<!-- <MobilePackages /> -->
+		<MobilePackages />
 		<Page3Mobile />
 		<Page4Mobile />
 	{/if}

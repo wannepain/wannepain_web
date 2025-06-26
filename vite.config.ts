@@ -1,6 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	server: {
@@ -9,7 +8,6 @@ export default defineConfig({
 		cors: true // allows cross-origin requests; customize if needed
 	},
 	plugins: [
-		tailwindcss(),
 		sveltekit()
 		
 	]

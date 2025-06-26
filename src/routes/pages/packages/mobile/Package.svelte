@@ -34,8 +34,8 @@
         padding: 0.8rem 1rem;
         background-color: "#191919";
         font-family: "Cascadia Code", monospace;
-        width: 380px;
-        height: 400px;
+        width: 20rem;
+        height: 30rem;
         background-color: #191919;
         box-shadow: inset rgba(255, 255, 255, 0.1) 0 0 3px;
         border:none;

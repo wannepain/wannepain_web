@@ -28,19 +28,26 @@
 <style>
     section{
         padding-top: 7rem;
+        background: radial-gradient(
+  circle at center,
+  rgba(255, 255, 255, 0.4) 2%,
+  rgba(25, 25, 25, 0.42) 15%
+)
     }
     div{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #FFF;
-        box-shadow: inset 0 0  35px rgba(25, 25, 25, 1);
+        /* background-color: #FFF;
+        box-shadow: inset 0 0  35px rgba(25, 25, 25, 1); */
         padding: 1rem;
+        background-color: rgba(25, 25, 25, 0.75);
+        backdrop-filter: blur(6px);
     }
     h1{
         font-family: "Cascadia Code", monospace;
-        color: #191919;
+        color: #FFF;
         font-size: 36px;
         margin: 0;
         font-weight: 600;
@@ -52,7 +59,7 @@
         font-size: 14px;
         opacity: 0.8;
           font-family: "Cascadia Code", monospace;
-        color: #191919;
+        color: #FFF;
         font-weight: 300;
     }
     strong{

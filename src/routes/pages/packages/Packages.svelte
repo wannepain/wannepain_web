@@ -1,10 +1,9 @@
 <script>
-    // import "/styles.css";
     import Package from "./Package.svelte";
-    // import "./../../../../static/styles.css";
+    // here we need to build a snappy carousel of packages
 </script>
-<div class="flex overflow-x-auto gap-6 snap-x snap-mandatory before:shrink-0 after:shrink-0 before:w-[30vw] after:w-[30vw]">
-    <div class="shrink-0 snap-center">
+<div>
+    <div>
         <Package 
         packageName="managment"
         />
