@@ -1,83 +1,108 @@
 <script lang="ts">
-    import { onMount, onDestroy } from "svelte";
-    import Package from "./Package.svelte";
+	import { onMount } from "svelte";
+	import Package from "./Package.svelte";
 
-    let container: HTMLDivElement;
-    let currentIndex = 0;
-    let autoplayInterval: string | number | NodeJS.Timeout | undefined;
-    let userScrollTimeout;
-    let hoverTimeout: string | number | NodeJS.Timeout | undefined;
+	let container: HTMLDivElement;
+	let currentIndex = 0;
+	let autoplayInterval: ReturnType<typeof setInterval> | undefined;
+	let userScrollTimeout: ReturnType<typeof setTimeout> | undefined;
+	let hoverTimeout: ReturnType<typeof setTimeout> | undefined;
 
-    const scrollToCard = (index: number) => {
-        const card = container.children[index];
-        if (card) {
-            // card.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-            card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+	// ❌ no scrollIntoView here
+	const scrollToCard = (index: number) => {
+		if (!container) return;
+		const card = container.children[index] as HTMLElement;
+		if (!card) return;
 
-        }
-    };
+		// center the card horizontally in the container
+		const offset =
+			card.offsetLeft -
+			(container.clientWidth - card.offsetWidth) / 2;
 
-    const startAutoplay = () => {
-        clearInterval(autoplayInterval);
-        autoplayInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % container.children.length;
-            scrollToCard(currentIndex);
-        }, 4000);
-    };
+		container.scrollTo({ left: offset, behavior: "smooth" });
+	};
 
-    const pauseAutoplay = () => {
-        clearInterval(autoplayInterval);
-    };
+	const startAutoplay = () => {
+		clearInterval(autoplayInterval);
+		if (!container) return;
+		autoplayInterval = setInterval(() => {
+			currentIndex = (currentIndex + 1) % container.children.length;
+			scrollToCard(currentIndex);
+		}, 4000);
+	};
 
-    const resumeAutoplay = (delay = 1000) => {
-        clearTimeout(userScrollTimeout);
-        clearTimeout(hoverTimeout);
-        hoverTimeout = setTimeout(() => {
-            startAutoplay();
-        }, delay);
-    };
+	const pauseAutoplay = () => {
+		clearInterval(autoplayInterval);
+	};
 
-    const handleScroll = () => {
-        pauseAutoplay();
-        resumeAutoplay(1000); // after scroll
+	const resumeAutoplay = (delay = 100) => {
+		clearTimeout(userScrollTimeout);
+		clearTimeout(hoverTimeout);
+		hoverTimeout = setTimeout(() => startAutoplay(), delay);
+	};
 
-        const center = container.scrollLeft + container.offsetWidth / 2;
-        let closestIndex = 0;
-        let minDistance = Infinity;
+	const isContainerInView = () => {
+		const rect = container.getBoundingClientRect();
+		return rect.top < window.innerHeight && rect.bottom > 0;
+	};
 
-        for (let i = 0; i < container.children.length; i++) {
-            const card = container.children[i];
-            const cardCenter = (card as HTMLElement).offsetLeft + (card as HTMLElement).offsetWidth / 2;
-            const distance = Math.abs(center - cardCenter);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestIndex = i;
-            }
-        }
+	const handleScroll = () => {
+		pauseAutoplay();
 
-        currentIndex = closestIndex;
-    };
+		if (isContainerInView()) {
+			resumeAutoplay(100);
+		}
 
-    onMount(() => {
-        startAutoplay();
-        container.addEventListener('scroll', handleScroll);
-        container.addEventListener('mouseenter', () => {
-            pauseAutoplay();
-            clearTimeout(hoverTimeout);
-        });
-        container.addEventListener('mouseleave', () => {
-            resumeAutoplay(10000); // resume after 10s
-        });
-    });
+		// snap‑to‑nearest logic
+		const center = container.scrollLeft + container.clientWidth / 2;
+		let closestIndex = 0;
+		let minDistance = Infinity;
 
-    onDestroy(() => {
-        clearInterval(autoplayInterval);
-        clearTimeout(userScrollTimeout);
-        clearTimeout(hoverTimeout);
-        container.removeEventListener('scroll', handleScroll);
-        container.removeEventListener('mouseenter', pauseAutoplay);
-    });
+		for (let i = 0; i < container.children.length; i++) {
+			const card = container.children[i] as HTMLElement;
+			const cardCenter =
+				card.offsetLeft + card.offsetWidth / 2;
+			const dist = Math.abs(center - cardCenter);
+			if (dist < minDistance) {
+				minDistance = dist;
+				closestIndex = i;
+			}
+		}
+
+		currentIndex = closestIndex;
+	};
+
+	onMount(() => {
+		if (!container) return;
+
+		startAutoplay();
+		container.addEventListener("scroll", handleScroll);
+
+		const onEnter = () => {
+			pauseAutoplay();
+			clearTimeout(hoverTimeout);
+		};
+		const onLeave = () => {
+			if (isContainerInView()) {
+				resumeAutoplay(10000);
+			}
+		};
+
+		container.addEventListener("mouseenter", onEnter);
+		container.addEventListener("mouseleave", onLeave);
+
+		return () => {
+			clearInterval(autoplayInterval);
+			clearTimeout(userScrollTimeout);
+			clearTimeout(hoverTimeout);
+			container.removeEventListener("scroll", handleScroll);
+			container.removeEventListener("mouseenter", onEnter);
+			container.removeEventListener("mouseleave", onLeave);
+		};
+	});
 </script>
+
+
 
 <div class="main">
     <div class="packages-container" bind:this={container}>
